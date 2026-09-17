@@ -1,0 +1,803 @@
+{
+  "address": "DMbLxuGRQdtYwhsXTGdp1qAKbzzR7jiR3gvvttgU36Tj",
+  "metadata": {
+    "name": "outcom",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "init_oapp",
+      "discriminator": [
+        220,
+        237,
+        94,
+        65,
+        27,
+        73,
+        156,
+        203
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "oapp_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  79,
+                  65,
+                  112,
+                  112
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "endpoint_program",
+          "type": "pubkey"
+        },
+        {
+          "name": "admin",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "initialize_trial",
+      "discriminator": [
+        67,
+        6,
+        167,
+        214,
+        152,
+        172,
+        208,
+        116
+      ],
+      "accounts": [
+        {
+          "name": "employer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "trial_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  84,
+                  114,
+                  105,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "employer"
+              },
+              {
+                "kind": "arg",
+                "path": "trial_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  86,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "trial_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "usdc_mint"
+        },
+        {
+          "name": "employer_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "trial_id",
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "category",
+          "type": "string"
+        },
+        {
+          "name": "skills",
+          "type": "string"
+        },
+        {
+          "name": "difficulty",
+          "type": "string"
+        },
+        {
+          "name": "objective",
+          "type": "string"
+        },
+        {
+          "name": "requirements",
+          "type": "string"
+        },
+        {
+          "name": "candidate_reward",
+          "type": "u64"
+        },
+        {
+          "name": "referral_reward",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "lz_receive",
+      "discriminator": [
+        8,
+        179,
+        120,
+        109,
+        33,
+        118,
+        189,
+        80
+      ],
+      "accounts": [
+        {
+          "name": "endpoint_program",
+          "signer": true
+        },
+        {
+          "name": "oapp_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  79,
+                  65,
+                  112,
+                  112
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "peer_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  80,
+                  101,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "oapp_config"
+              },
+              {
+                "kind": "arg",
+                "path": "params.src_eid"
+              }
+            ]
+          }
+        },
+        {
+          "name": "trial_account",
+          "writable": true
+        },
+        {
+          "name": "vault_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  86,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "trial_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "candidate_token_account",
+          "writable": true
+        },
+        {
+          "name": "referrer_token_account",
+          "writable": true,
+          "optional": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "LzReceiveParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "refer_candidate",
+      "discriminator": [
+        116,
+        156,
+        144,
+        107,
+        233,
+        207,
+        156,
+        52
+      ],
+      "accounts": [
+        {
+          "name": "referrer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "trial_account"
+        },
+        {
+          "name": "referral",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  82,
+                  101,
+                  102,
+                  101,
+                  114,
+                  114,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "trial_account"
+              },
+              {
+                "kind": "arg",
+                "path": "candidate"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "candidate",
+          "type": "pubkey"
+        },
+        {
+          "name": "note",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "set_peer",
+      "discriminator": [
+        32,
+        70,
+        184,
+        229,
+        200,
+        115,
+        227,
+        177
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "oapp_config"
+        },
+        {
+          "name": "peer_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  80,
+                  101,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "oapp_config"
+              },
+              {
+                "kind": "arg",
+                "path": "src_eid"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "src_eid",
+          "type": "u32"
+        },
+        {
+          "name": "peer_address",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "start_trial",
+      "discriminator": [
+        140,
+        246,
+        178,
+        189,
+        48,
+        119,
+        19,
+        125
+      ],
+      "accounts": [
+        {
+          "name": "candidate",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "trial_account",
+          "writable": true
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "OAppConfig",
+      "discriminator": [
+        93,
+        56,
+        102,
+        151,
+        135,
+        221,
+        46,
+        250
+      ]
+    },
+    {
+      "name": "PeerConfig",
+      "discriminator": [
+        181,
+        157,
+        86,
+        198,
+        33,
+        193,
+        94,
+        203
+      ]
+    },
+    {
+      "name": "Referral",
+      "discriminator": [
+        30,
+        235,
+        136,
+        224,
+        106,
+        107,
+        49,
+        64
+      ]
+    },
+    {
+      "name": "TrialAccount",
+      "discriminator": [
+        202,
+        241,
+        246,
+        201,
+        17,
+        7,
+        232,
+        214
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "TrialIdTooLong",
+      "msg": "Trial ID exceeds maximum length of 32 bytes."
+    },
+    {
+      "code": 6001,
+      "name": "TrialNotOpen",
+      "msg": "Trial is not open for applicants."
+    },
+    {
+      "code": 6002,
+      "name": "InvalidStatus",
+      "msg": "Trial is in an invalid state for this operation."
+    },
+    {
+      "code": 6003,
+      "name": "Overflow",
+      "msg": "Arithmetic overflow occurred."
+    },
+    {
+      "code": 6004,
+      "name": "UnauthorizedEndpoint",
+      "msg": "Unauthorized LayerZero Endpoint caller."
+    },
+    {
+      "code": 6005,
+      "name": "InvalidSourceEID",
+      "msg": "Invalid Source EID from LayerZero message."
+    },
+    {
+      "code": 6006,
+      "name": "InvalidPeerSender",
+      "msg": "Invalid Peer Sender from LayerZero message."
+    },
+    {
+      "code": 6007,
+      "name": "InvalidPayloadLength",
+      "msg": "Invalid payload length."
+    },
+    {
+      "code": 6008,
+      "name": "InvalidPayload",
+      "msg": "Invalid payload data."
+    },
+    {
+      "code": 6009,
+      "name": "TrialIdMismatch",
+      "msg": "Trial ID in payload does not match account."
+    },
+    {
+      "code": 6010,
+      "name": "InvalidCandidateAccount",
+      "msg": "Candidate token account does not match payload recipient."
+    },
+    {
+      "code": 6011,
+      "name": "InvalidReferrerAccount",
+      "msg": "Referrer token account does not match payload recipient."
+    },
+    {
+      "code": 6012,
+      "name": "MetadataTooLong",
+      "msg": "A metadata field exceeds its maximum length."
+    },
+    {
+      "code": 6013,
+      "name": "CannotReferSelf",
+      "msg": "Referrer cannot refer themselves."
+    }
+  ],
+  "types": [
+    {
+      "name": "LzReceiveParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "src_eid",
+            "type": "u32"
+          },
+          {
+            "name": "sender",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "nonce",
+            "type": "u64"
+          },
+          {
+            "name": "guid",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "payload",
+            "type": "bytes"
+          },
+          {
+            "name": "extra_data",
+            "type": "bytes"
+          }
+        ]
+      }
+    },
+    {
+      "name": "OAppConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "endpoint_program",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PeerConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "src_eid",
+            "type": "u32"
+          },
+          {
+            "name": "address",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Referral",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "trial",
+            "type": "pubkey"
+          },
+          {
+            "name": "trial_id",
+            "type": "string"
+          },
+          {
+            "name": "referrer",
+            "type": "pubkey"
+          },
+          {
+            "name": "candidate",
+            "type": "pubkey"
+          },
+          {
+            "name": "note",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TrialAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "employer",
+            "type": "pubkey"
+          },
+          {
+            "name": "trial_id",
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "name": "category",
+            "type": "string"
+          },
+          {
+            "name": "skills",
+            "type": "string"
+          },
+          {
+            "name": "difficulty",
+            "type": "string"
+          },
+          {
+            "name": "objective",
+            "type": "string"
+          },
+          {
+            "name": "requirements",
+            "type": "string"
+          },
+          {
+            "name": "candidate_reward",
+            "type": "u64"
+          },
+          {
+            "name": "referral_reward",
+            "type": "u64"
+          },
+          {
+            "name": "total_locked",
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "TrialStatus"
+              }
+            }
+          },
+          {
+            "name": "selected_candidate",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "vault_bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TrialStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Open"
+          },
+          {
+            "name": "InProgress"
+          },
+          {
+            "name": "ReadyToSubmit"
+          },
+          {
+            "name": "UnderReview"
+          },
+          {
+            "name": "Verified"
+          },
+          {
+            "name": "Paid"
+          },
+          {
+            "name": "Rejected"
+          }
+        ]
+      }
+    }
+  ]
+}
