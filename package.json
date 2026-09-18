@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "once": "node index.mjs once",
-    "watch": "node index.mjs watch"
+    "watch": "node index.mjs watch",
+    "start": "node server.mjs"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.32.1",
