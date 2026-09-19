@@ -5,9 +5,15 @@ import { settleOnSolana } from "./settle.mjs";
 
 
 const port = Number(process.env.PORT || 8787);
+const ALLOW_ORIGIN = process.env.CORS_ORIGIN || "*";
 
 function send(res, code, obj) {
-  res.writeHead(code, { "Content-Type": "application/json" });
+  res.writeHead(code, {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": ALLOW_ORIGIN,
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  });
   res.end(JSON.stringify(obj));
 }
 
@@ -26,10 +32,16 @@ http
     res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
 
     if (req.method === "OPTIONS") {
-      res.writeHead(204);
+      res.writeHead(204, {
+        "Access-Control-Allow-Origin": ALLOW_ORIGIN,
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Max-Age": "86400",
+      });
       res.end();
       return;
     }
+
 
     const path = (req.url || "").split("?")[0];
 
